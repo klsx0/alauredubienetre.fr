@@ -1,0 +1,85 @@
+.fond-0 {
+    background: hsla(357, 70%, 95%,1);
+    opacity: 55%;
+    border-radius: 45px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .my-hero-bg {
+    background: url('/bg-hero.jpg') center center no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .my-hero-bg::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      hsla(0, 69%, 95%, 1),
+      hsla(337, 69%, 71%, 0.46)
+    );
+    opacity: 0.64;
+  }
+
+  .my-hero-bg .hero-body {
+    position: relative; /* Keep text above the overlay */
+    z-index: 1;
+  }
+  .navbar {
+    overflow: visible !important;
+  }
+  
+  .navbar-brand .navbar-item {
+    overflow: visible;
+  }
+  
+  /* Use viewport width units for the logo height */
+  .navbar-brand .navbar-item img {
+    max-height: none;
+    height: 6vw;  /* 10% of the viewport width */
+    margin-top: -1vw;
+    margin-bottom: -1vw;
+    width: auto;
+  }
+
+  .title {
+    margin-bottom: 3vw !important;
+  }
+  .subtitle {
+    margin-bottom: 1vw !important;
+  }
+  .title, .subtitle, .navbar-text {
+    color: #431A1B;
+  }
+
+  .button {
+    background-color: #e6cdc7;
+  }
+  .button.is-outlined {
+    border-color: #e6cdc7;
+    color: #e6cdc7;
+  }
+
+  html {
+    scrollbar-face-color: #431a1b;
+    scrollbar-base-color: #431a1b;
+    scrollbar-3dlight-color: #431a1b;
+    scrollbar-highlight-color: #431a1b;
+    scrollbar-track-color: #e8c3be;
+    scrollbar-arrow-color: #e8c3be;
+    scrollbar-shadow-color: #431a1b;
+  }
+  
+  ::-webkit-scrollbar { width: 12px; height: 3px;}
+::-webkit-scrollbar-track {  background-color: #431a1b;}
+::-webkit-scrollbar-track-piece { background-color: #e8c3be;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #431a1b; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #431a1b;}
+::-webkit-resizer { background-color: #431a1b;}
+
+.footer {
+  background: #f0e8e6;
+}
