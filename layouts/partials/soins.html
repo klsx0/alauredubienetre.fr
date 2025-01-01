@@ -5,7 +5,7 @@
     {{ range where .Site.RegularPages "Params.highlighted" true }}
         <div class="column">
             <a>
-                <div class="card">
+                <div class="card highlighted">
                     {{ $imagePath := printf "/%s" .Params.pic }}
                     {{ $asset := resources.Get $imagePath }}
                     {{ $img := $asset.Resize "x600 webp picture" }}

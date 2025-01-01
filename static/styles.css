@@ -90,3 +90,10 @@
 .card {
   height: 100% !important;
 }
+.highlighted {
+  background: #eddad5;
+}
+
+html {
+  background: #fff6f7;
+}
