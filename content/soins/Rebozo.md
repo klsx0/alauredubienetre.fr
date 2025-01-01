@@ -1,8 +1,12 @@
 ---
-title: "Rituel Rebozo"
+title: "Soin Rituel Rebozo"
 highlighted: true
 pic: rebozo.jpg
-description: Un soin traditionnel mexicain pour un recentrage physique et émotionnel.
+description: Inspiré d’une tradition mexicaine, ce soin enveloppant combine un massage relaxant et des techniques de resserrement pour créer un sentiment de réconfort et de sécurité.
+benefits:
+  - "Procure un sentiment d’unité et d’alignement."
+  - "Libère les blocages émotionnels et corporels."
+  - "Renforce l’ancrage et le sentiment de sérénité."
+price: 90
+duration: "1h30"
 ---
-
-Ce rituel d’origine mexicaine combine un massage et un resserrement corporel pour apaiser et revitaliser en profondeur. Une expérience unique pour une reconnexion à soi-même.

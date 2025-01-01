@@ -2,7 +2,11 @@
 title: "Aromatouch"
 highlighted: true
 pic: aroma.jpg
-description: Un massage aux huiles essentielles pour réduire le stress et favoriser la relaxation.
+description: Une approche douce utilisant des huiles essentielles appliquées par des gestes précis et harmonieux, idéale pour retrouver sérénité et équilibre.
+benefits:
+ - "Apaise le stress accumulé et l'anxiété."
+ - "Stimule et renforce le système immunitaire."
+ - "Favorise un profond relâchement corporel et mental."
+price: 60
+duration: "45 min"
 ---
-
-Ce massage combine l’aromathérapie et des techniques spécifiques pour une relaxation profonde. Il est conçu pour réduire les tensions physiques et émotionnelles en utilisant des huiles essentielles.
