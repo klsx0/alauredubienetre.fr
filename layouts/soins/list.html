@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="section">
+</section>
+{{ range .Pages }}
+<section class="section">
+    
+    <h1 class="title" id="{{ .Title }}">{{ .Title }}</h1>
+    <h2 class="subtitle">
+        {{ .Params.Description }}
+    </h2>
+    <div class="content">
+        Bénéfices:
+        <ul>
+            {{ range .Params.benefits }}
+            <li>
+                {{ . }}
+            </li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ .Params.duration }} - {{ .Params.price }} €
+</section>
+{{ end }}
+
+{{ end }}
