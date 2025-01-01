@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="section">
+</section>
+{{ range .Site.RegularPages }}
+<section class="section">
+    <h1 class="title">{{ .Title }}</h1>
+    <h2 class="subtitle">
+     {{ .Params.Description }}
+    </h2>
+</section>
+{{ end }}
+
+{{ end }}
