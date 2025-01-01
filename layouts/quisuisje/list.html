@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="section">
+</section>
+{{ range .Site.RegularPages }}
+<section class="section">
+    {{ .Content }}
+</section>
+{{ end }}
+
+{{ end }}

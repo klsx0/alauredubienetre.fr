@@ -4,7 +4,7 @@
     <div class="columns  is-multiline">
     {{ range where .Site.RegularPages "Params.highlighted" true }}
         <div class="column">
-            <a>
+            <a href="/soins/#{{ .Title }}" >
                 <div class="card highlighted">
                     {{ $imagePath := printf "/%s" .Params.pic }}
                     {{ $asset := resources.Get $imagePath }}
@@ -28,5 +28,7 @@
         </div>
     {{ end }}
     </div>
-    <button class="button  is-primary is-rounded">En savoir plus</button>
+    <a href="/soins">
+        <button class="button  is-primary is-rounded">En savoir plus</button>
+    </a>
 </section>
