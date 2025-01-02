@@ -8,7 +8,7 @@
   }
 
   .my-hero-bg {
-    background: url('/bg-hero.jpg') center center no-repeat;
+    background: url('/bg-hero.webp') center center no-repeat;
     background-size: cover;
     position: relative;
   }
