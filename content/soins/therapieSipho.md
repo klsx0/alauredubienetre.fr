@@ -5,6 +5,6 @@ benefits:
   - "Relâche les tensions profondément ancrées."
   - "Aide à retrouver une stabilité intérieure."
   - "Favorise un état durable de bien-être et de clarté."
-price: 85
-duration: "1h15"
+price: 40
+duration: "45 min"
 ---

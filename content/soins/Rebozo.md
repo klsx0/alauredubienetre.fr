@@ -7,6 +7,6 @@ benefits:
   - "Procure un sentiment d’unité et d’alignement."
   - "Libère les blocages émotionnels et corporels."
   - "Renforce l’ancrage et le sentiment de sérénité."
-price: 90
-duration: "1h30"
+price: 230
+duration: "2h30"
 ---

@@ -7,6 +7,6 @@ benefits:
  - "Apaise le stress accumulé et l'anxiété."
  - "Stimule et renforce le système immunitaire."
  - "Favorise un profond relâchement corporel et mental."
-price: 60
+price: 65
 duration: "45 min"
 ---

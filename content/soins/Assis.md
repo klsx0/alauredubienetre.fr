@@ -7,6 +7,6 @@ benefits:
   - "Soulage les tensions musculaires au niveau de la nuque, du dos et des épaules."
   - "Favorise une meilleure concentration."
   - "Permet de retrouver une sensation de légèreté en peu de temps."
-price: 30
+price: 20
 duration: "20 min"
 ---
