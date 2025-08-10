@@ -4,16 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="{{ .Permalink }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-    <link rel="stylesheet" href="/styles.css">
+    {{ $bulma := resources.GetRemote "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" | resources.Minify | resources.Fingerprint }}
+    {{ $app   := resources.Get "styles.css" | resources.Minify | resources.Fingerprint }}
+
+    <!-- Bulma : préchargé puis appliqué (réduit le blocking time) -->
+    <link rel="preload" as="style"
+          href="{{ $bulma.RelPermalink }}"
+          integrity="{{ $bulma.Data.Integrity }}"
+          crossorigin>
+    <link rel="stylesheet"
+          href="{{ $bulma.RelPermalink }}"
+          integrity="{{ $bulma.Data.Integrity }}"
+          crossorigin>
+
+    <!-- Ton CSS : préchargé + fingerprint pour cache long -->
+    <link rel="preload" as="style" href="{{ $app.RelPermalink }}">
+    <link rel="stylesheet" href="{{ $app.RelPermalink }}">
+
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <title>{{ block "title" . }}
-      {{ .Site.Title }}
-    {{ end }}</title>
+
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte. Réservation et infos tarifs.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
@@ -27,7 +41,8 @@
       <!-- The part of the page that begins to differ between templates -->
     {{ end }}
     {{ partial "footer.html" . }}
-    <script>
+
+    <script defer>
       // Minimal Bulma burger
       document.addEventListener('DOMContentLoaded', () => {
         const burgers = Array.from(document.querySelectorAll('.navbar-burger'));
