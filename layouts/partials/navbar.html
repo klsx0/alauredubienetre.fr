@@ -1,4 +1,5 @@
 <nav class="navbar is-transparent is-fixed-top fond-0 is-rounded" role="navigation" aria-label="main navigation">
+  {{ $rel := .RelPermalink }}
   <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item" href="/" aria-label="Accueil">
@@ -13,9 +14,9 @@
 
       <div id="mainNav" class="navbar-menu">
         <div class="navbar-end">
-            <a class="navbar-item navbar-text" href="/"><b>Accueil</b></a>
-            <a class="navbar-item navbar-text" href="/quisuisje"><b>Qui suis-je&nbsp;?</b></a>
-            <a class="navbar-item navbar-text" href="/soins"><b>Prestations et tarifs</b></a>
+            <a class="navbar-item navbar-text" href="/" {{ if .IsHome }}aria-current="page"{{ end }}><b>Accueil</b></a>
+            <a class="navbar-item navbar-text" href="/quisuisje" {{ if hasPrefix $rel "/quisuisje" }}aria-current="page"{{ end }}><b>Qui suis-je&nbsp;?</b></a>
+            <a class="navbar-item navbar-text" href="/soins" {{ if hasPrefix $rel "/soins" }}aria-current="page"{{ end }}><b>Prestations et tarifs</b></a>
             <a class="navbar-item navbar-text" href="/#contact"><b>Contact</b></a>
         </div>
       </div>

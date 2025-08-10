@@ -1,5 +1,6 @@
 ---
 title: "Massage des 5 Continents"
+pic: m5c.jpg
 description: Ce soin unique associe différentes méthodes de massage et des huiles naturelles pour offrir une expérience complète de détente et de revitalisation.
 benefits:
   - "Détoxifie le corps en profondeur."

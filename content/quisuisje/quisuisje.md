@@ -1,54 +1,59 @@
 ---
 title: "Qui suis-je ?"
+portrait: "portrait.jpg"
+lead: "Je suis Aurélie, auxiliaire de puériculture en maternité et praticienne en massages bien-être. J’accompagne les parents et leurs nouveau-nés à l’hôpital et j’offre, en parallèle, des soins personnalisés pour soulager, apaiser et reconnecter le corps et l’esprit."
+method:
+  - { title: "Relaxation profonde", text: "des gestes enveloppants pour relâcher le corps en profondeur." }
+  - { title: "Réconfort", text: "un moment rassurant et chaleureux, adapté à vos besoins." }
+  - { title: "Invitation à la reconnexion", text: "se recentrer sur soi-même et retrouver un équilibre intérieur." }
+  - { title: "Détente émotionnelle", text: "apaiser le mental et libérer les tensions accumulées." }
+  - { title: "Sérénité intérieure", text: "un état durable de calme et de bien-être." }
+formations:
+  - { name: "Aromatouch Technique", org: "Dr David R. Hill", date: "10/2022" }
+  - { name: "Massage des 5 Continents", org: "Frédérique Decat – Fédération IM5C", date: "11/2022" }
+  - { name: "Amma Assis", org: "Corinne Bouty – École Amma Shin Do", date: "07/2023" }
+  - { name: "Soin Rituel Rebozo", org: "Yaël Flauder", date: "08/2023" }
+  - { name: "Massage Femme Enceinte", org: "ALN Formation 31", date: "03/2024" }
+  - { name: "Thérapie Sipho", org: "Dr Denis Rémy", date: "03/2024" }
 ---
-
-
-# Qui suis-je ?
-
-Je m'appelle **Aurélie**, je suis praticienne en massages bien-être et auxiliaire de puériculture en service maternité.
 
 ## Mon activité principale
-
-Je consacre 70 % de mon temps à l’hôpital, où j’exerce un travail d’accompagnement auprès des parents et de leurs nouveau-nés dans les premiers moments de leur vie. Mon rôle consiste à prodiguer des soins au bébé, à soutenir les jeunes parents dans leur quotidien et à les accompagner avec bienveillance.
+Je consacre 70 % de mon temps à l’hôpital, en service maternité.  
+J’y accompagne les parents et leurs nouveau-nés dans les premiers moments de vie,  
+en prodiguant des soins au bébé et en soutenant les jeunes parents avec bienveillance.
 
 ## Mon activité en parallèle
+Je suis également praticienne en massages bien-être.  
+C’est une véritable vocation qui me permet de proposer des instants de **relaxation profonde** et de **réconfort**.  
+Chaque séance est personnalisée selon les besoins spécifiques :  
+- soulager les tensions physiques,  
+- apaiser le stress,  
+- s’accorder un moment pour soi.
 
-En parallèle, je suis également praticienne en massages bien-être. Cette activité complémentaire est une véritable vocation pour moi. Elle me permet de proposer des moments de **relaxation profonde** et de **réconfort** aux personnes qui en ressentent le besoin. Chaque massage est personnalisé et adapté aux besoins spécifiques de mes clients, qu’il s’agisse de soulager des tensions physiques, d’apaiser le stress ou tout simplement de s’accorder un moment pour soi.
-
-J’interviens également pour des massages spécifiques, tels que ceux adaptés aux femmes enceintes ou aux personnes ayant des douleurs chroniques. Ces soins permettent de reconnecter le corps et l’esprit, et de retrouver une harmonie globale.
+J’interviens aussi pour des massages ciblés, notamment pour les femmes enceintes et les personnes souffrant de douleurs chroniques, afin de reconnecter le corps et l’esprit.
 
 ## Pourquoi le massage ?
+Pour moi, le massage est plus qu’un simple soin physique : c’est une **invitation à la reconnexion** avec soi-même.  
+Dans un quotidien rythmé par le stress et les contraintes, il offre une **pause précieuse** pour écouter son corps.
 
-Pour moi, le massage est bien plus qu’un simple soin physique. C’est une **invitation à la reconnexion** avec soi-même, un outil puissant pour améliorer le bien-être au quotidien. Dans notre société où le stress et les contraintes rythment nos journées, le massage offre une pause précieuse pour écouter son corps et prendre soin de soi.
-
-Chaque massage que je propose est réalisé dans une démarche holistique, avec une attention particulière portée à la **détente émotionnelle** et à la **sérénité intérieure**. Le toucher, à travers des techniques douces ou plus profondes, a le pouvoir de libérer des tensions accumulées, d’apporter un soulagement durable et de restaurer une énergie positive.
-
----
-
-## Mes formations
-
-Pour garantir des soins de qualité, je me forme régulièrement auprès des meilleurs spécialistes. Voici mes formations :
-
-- **Aromatouch Technique**  
-  Créée par Dr. David R. Hill – **10/2022**
-
-- **Massage des 5 Continents**  
-  Formation dispensée par Frédérique Decat, formatrice agréée par la Fédération Internationale du Massage des 5 Continents – **11/2022**
-
-- **Amma Assis**  
-  Formation réalisée auprès de Corinne Bouty, fondatrice et formatrice de l'École Amma Shin Do – **07/2023**
-
-- **Soin Rituel Rebozo**  
-  Remis par Yaël Flauder – **08/2023**
-
-- **Massage Femme Enceinte**  
-  Formation dispensée par ALN Formation 31 – **03/2024**
-
-- **Thérapie Sipho**  
-  Remis par le Dr Denis Rémy – **03/2024**
+Chaque soin s’inscrit dans une **démarche holistique**, avec une attention portée à la **détente émotionnelle** et à la **sérénité intérieure**.  
+Le toucher, qu’il soit doux ou profond, permet de :  
+- libérer les tensions accumulées,  
+- apporter un soulagement durable,  
+- restaurer une énergie positive.
 
 ---
 
-### Vous souhaitez en savoir plus ou réserver un soin ?
+### Mes formations
+*(mise à jour régulière auprès de spécialistes)*  
+- **Aromatouch Technique** — Dr David R. Hill – 10/2022  
+- **Massage des 5 Continents** — Frédérique Decat, Fédération IM5C – 11/2022  
+- **Amma Assis** — Corinne Bouty, École Amma Shin Do – 07/2023  
+- **Soin Rituel Rebozo** — Yaël Flauder – 08/2023  
+- **Massage Femme Enceinte** — ALN Formation 31 – 03/2024  
+- **Thérapie Sipho** — Dr Denis Rémy – 03/2024  
 
-N’hésitez pas à [me contacter](#) par téléphone ou email. Je serais ravie de vous accompagner dans votre cheminement vers le bien-être.
+---
+
+### Envie d’en savoir plus ou de réserver ?
+[Contactez-moi](#contact) par téléphone ou email — je serai ravie de vous accompagner sur votre chemin vers le bien-être.

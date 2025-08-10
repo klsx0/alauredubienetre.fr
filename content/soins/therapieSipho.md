@@ -1,5 +1,6 @@
 ---
 title: "Thérapie Sipho"
+pic: sipho.jpg
 description: Une méthode holistique combinant des gestes précis pour travailler à la fois sur le corps et l’esprit, dans le but d’harmoniser vos énergies.
 benefits:
   - "Relâche les tensions profondément ancrées."
