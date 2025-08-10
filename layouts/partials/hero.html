@@ -1,28 +1,28 @@
 <section class="hero is-link is-fullheight-with-navbar my-hero-bg">
+
+  {{/* Cherche l'image source dans assets/images/ */}}
   {{ $src := resources.Get "images/bg-hero.jpg" }}
   {{ if not $src }}{{ $src = resources.Get "images/bg-hero.png" }}{{ end }}
 
   {{ if $src }}
-    {{ $avif480  := $src.Fit "480x avif" }}
-    {{ $avif768  := $src.Fit "768x avif" }}
-    {{ $avif1280 := $src.Fit "1280x avif" }}
-    {{ $avif1536 := $src.Fit "1536x avif" }}
-    {{ $webp480  := $src.Fit "480x webp" }}
-    {{ $webp768  := $src.Fit "768x webp" }}
-    {{ $webp1280 := $src.Fit "1280x webp" }}
-    {{ $webp1536 := $src.Fit "1536x webp" }}
+    {{/* Génération AVIF & WebP avec tailles responsive (3:2) */}}
+    {{ $avif480  := $src.Fit "480x320 avif" }}
+    {{ $avif768  := $src.Fit "768x512 avif" }}
+    {{ $avif1280 := $src.Fit "1280x853 avif" }}
+    {{ $avif1536 := $src.Fit "1536x1024 avif" }}
+    {{ $webp480  := $src.Fit "480x320 webp" }}
+    {{ $webp768  := $src.Fit "768x512 webp" }}
+    {{ $webp1280 := $src.Fit "1280x853 webp" }}
+    {{ $webp1536 := $src.Fit "1536x1024 webp" }}
 
-    <!-- Précharge une taille mobile pertinente ; fetchpriorité haute pour booster le LCP -->
+    <!-- Preload + priorité haute pour LCP -->
     <link rel="preload" as="image"
           href="{{ $webp768.RelPermalink }}"
           imagesrcset="{{ $avif480.RelPermalink }} 480w, {{ $avif768.RelPermalink }} 768w, {{ $avif1280.RelPermalink }} 1280w, {{ $avif1536.RelPermalink }} 1536w"
           imagesizes="100vw"
           fetchpriority="high">
-  {{ end }}
 
-  <!-- Calque image de fond -->
-  <div class="hero-bg-wrap" aria-hidden="true">
-    {{ if $src }}
+    <div class="hero-bg-wrap" aria-hidden="true">
       <picture>
         <source type="image/avif"
                 srcset="{{ $avif480.RelPermalink }} 480w, {{ $avif768.RelPermalink }} 768w, {{ $avif1280.RelPermalink }} 1280w, {{ $avif1536.RelPermalink }} 1536w"
@@ -38,11 +38,14 @@
              decoding="async"
              fetchpriority="high">
       </picture>
-    {{ else }}
-      <!-- Fallback si l'image n'est pas dans assets/ -->
+    </div>
+
+  {{ else }}
+    <!-- Fallback si aucune image dans assets/ -->
+    <div class="hero-bg-wrap" aria-hidden="true">
       <img class="hero-bg-img" src="/bg-hero.webp" alt="" decoding="async" fetchpriority="high">
-    {{ end }}
-  </div>
+    </div>
+  {{ end }}
 
   <div class="hero-body">
     <div class="container">
