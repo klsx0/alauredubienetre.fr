@@ -1,27 +1,72 @@
 {{ define "main" }}
-<section class="section"></section>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Prestations et tarifs</h1>
+    <h2 class="subtitle">Choisissez le soin qui vous correspond, puis contactez-moi pour réserver.</h2>
 
-{{ range .Pages }}
-  <section class="section">
-    <h1 class="title" id="{{ .Title | urlize }}">{{ .Title }}</h1>
-
-    <h2 class="subtitle">
-      {{ .Params.description }}
-    </h2>
-
-    <div class="content">
-      <p><strong>Bénéfices :</strong></p>
-      <ul>
-        {{ range .Params.benefits }}
-          <li>{{ . }}</li>
-        {{ end }}
-      </ul>
+    <!-- Sous-navigation collante -->
+    <div class="soins-subnav">
+      {{ range .Pages }}
+        <a href="#{{ .Title | urlize }}">{{ .Title }}</a>
+      {{ end }}
     </div>
+  </div>
+</section>
 
-    <p>
-      <span class="tag is-light">{{ .Params.duration }}</span>
-      <span class="tag is-link is-light">{{ .Params.price }} €</span>
-    </p>
+{{ $i := 0 }}
+{{ range .Pages }}
+  {{ $i = add $i 1 }}
+  {{ $alt := mod $i 2 }}
+
+  <section class="section" id="{{ .Title | urlize }}">
+    <div class="container">
+      <article class="soins-card {{ if eq $alt 0 }}alt{{ end }}">
+        <!-- Couverture -->
+        <div class="soins-cover">
+          {{/* essaie d'abord assets/images/<pic> sinon /static/<pic> */}}
+          {{ $pic := .Params.pic }}
+          {{ if $pic }}
+            {{ $path := printf "images/%s" $pic }}
+            {{ $src := resources.Get $path }}
+            {{ if $src }}
+              {{ $avif := $src.Fit "1200x800 avif" }}
+              {{ $webp := $src.Fit "1200x800 webp" }}
+              <picture>
+                <source type="image/avif" srcset="{{ $avif.RelPermalink }}">
+                <source type="image/webp" srcset="{{ $webp.RelPermalink }}">
+                <img src="{{ $webp.RelPermalink }}" alt="{{ .Title }}" loading="lazy" decoding="async" width="{{ $webp.Width }}" height="{{ $webp.Height }}">
+              </picture>
+            {{ else }}
+              <img src="{{ printf "/%s" $pic | relURL }}" alt="{{ .Title }}" loading="lazy" decoding="async">
+            {{ end }}
+          {{ else }}
+            <!-- Pas d'image fournie -->
+            <img src="/placeholder-3x2.webp" alt="" loading="lazy" decoding="async">
+          {{ end }}
+        </div>
+
+        <!-- Corps -->
+        <div class="soins-body">
+          <h2 class="title is-3">{{ .Title }}</h2>
+          <p class="subtitle is-5">{{ .Params.description }}</p>
+
+          {{ with .Params.benefits }}
+          <div class="content">
+            <p><strong>Bénéfices :</strong></p>
+            <ul>
+              {{ range . }}<li>{{ . }}</li>{{ end }}
+            </ul>
+          </div>
+          {{ end }}
+
+          <div class="soins-meta">
+            {{ with .Params.duration }}<span class="duration-chip">⏱ {{ . }}</span>{{ end }}
+            {{ with .Params.price }}<span class="price-chip">{{ . }} €</span>{{ end }}
+          </div>
+
+        </div>
+      </article>
+    </div>
   </section>
 {{ end }}
 
