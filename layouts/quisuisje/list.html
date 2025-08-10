@@ -1,10 +1,60 @@
 {{ define "main" }}
+{{ $page := (index .Pages 0) }}
 <section class="section">
-</section>
-{{ range .Site.RegularPages }}
-<section class="section">
-    {{ .Content }}
-</section>
-{{ end }}
+  <div class="container">
+    <h1 class="title">{{ $page.Title }}</h1>
 
+    <div class="bio-wrap">
+      <!-- Contenu condensé -->
+      <article class="bio-card">
+        {{ with $page.Params.lead }}
+          <p class="bio-lead">{{ . }}</p>
+        {{ end }}
+
+        {{ with $page.Params.method }}
+          <div class="bio-steps">
+            {{ range . }}
+              <div class="bio-step">
+                <div aria-hidden="true">✨</div>
+                <div><strong>{{ .title }}</strong><br><span class="tl-meta">{{ .text }}</span></div>
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ with $page.Params.formations }}
+          <hr style="margin:1rem 0">
+          <h2 class="title is-4">Mes formations</h2>
+          <div class="formations">
+            <div class="formations-grid">
+              {{ range . }}
+                <article class="form-card">
+                  <div class="form-head">
+                    <div class="form-title">{{ .name }}</div>
+                    {{ with .date }}<span class="date-chip">{{ . }}</span>{{ end }}
+                  </div>
+                  {{ with .org }}<div class="form-org">{{ . }}</div>{{ end }}
+                </article>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+
+        <div class="bio-details">
+          <details>
+            <summary>En savoir plus</summary>
+            <div class="content" style="margin-top:1rem;">
+              {{ $page.Content }}
+            </div>
+          </details>
+        </div>
+
+        <div class="buttons" style="margin-top:1rem;">
+          <a class="button is-primary is-rounded" href="/#contact">Prendre contact</a>
+          <a class="button is-primary is-rounded is-outlined" href="/soins">Voir les soins</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 {{ end }}

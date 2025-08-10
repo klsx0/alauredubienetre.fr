@@ -8,6 +8,7 @@
   --c-bg:#fff6f7;
   --c-footer:#fffaf9;
   --c-card-border:rgba(67,26,27,.08);
+  --c-border-soft:rgba(67,26,27,.12);
   --c-card-shadow:rgba(0,0,0,.06);
   --c-card-shadow-strong:rgba(0,0,0,.08);
   --c-subtitle:#5b3a3b;
@@ -27,7 +28,7 @@
    ============================== */
 html{ background:var(--c-bg); }
 
-/* scrollbar (FF + WebKit) */
+/* Scrollbar (FF + WebKit) */
 html{ scrollbar-color: var(--c-text) var(--c-accent-2); }
 ::-webkit-scrollbar{ width:12px; height:3px; }
 ::-webkit-scrollbar-track{ background-color:var(--c-text); }
@@ -37,12 +38,12 @@ html{ scrollbar-color: var(--c-text) var(--c-accent-2); }
 
 /* Focus accessible */
 :focus-visible{ outline:3px solid var(--c-text); outline-offset:2px; }
-a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid var(--c-text); outline-offset:3px; }
+:where(a,.button,.card):focus-visible{ outline:3px solid var(--c-text); outline-offset:3px; }
 
 /* Typo & couleurs de texte */
-.title, .subtitle, .navbar-text{ color:var(--c-text); }
-.title{ margin-bottom:1rem !important; letter-spacing:-.01em; }
-.subtitle{ margin-bottom:.75rem !important; opacity:.9; }
+.title,.subtitle,.navbar-text{ color:var(--c-text); }
+.title{ margin-bottom:1rem; letter-spacing:-.01em; }
+.subtitle{ margin-bottom:.75rem; opacity:.9; }
 
 /* ==============================
    Navbar
@@ -53,12 +54,11 @@ a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid v
   border-radius:0; margin:0;
   box-shadow:0 2px 10px rgba(0,0,0,.06);
 }
-.navbar{ overflow:visible !important; backdrop-filter:saturate(120%) blur(6px); }
+.navbar{ overflow:visible; backdrop-filter:saturate(120%) blur(6px); }
 .navbar-brand .navbar-item{ overflow:visible; }
-.navbar-brand .navbar-item img{
-  height:clamp(36px,5vw,56px); max-height:56px; width:auto; margin:0;
-}
+.navbar-brand .navbar-item img{ height:clamp(36px,5vw,56px); max-height:56px; width:auto; margin:0; }
 .navbar-burger{ color:var(--c-text); }
+
 .navbar-menu.is-active{ background:var(--c-accent); }
 
 .navbar-item.navbar-text{
@@ -67,8 +67,8 @@ a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid v
 .navbar-item.navbar-text:is(:hover,:focus-visible){ color:#7a3a3b; }
 .navbar-item.navbar-text[aria-current="page"]::after,
 .navbar-item.navbar-text:is(:hover,:focus-visible)::after{
-  content:""; position:absolute; left:.75rem; right:.75rem; bottom:.4rem;
-  height:2px; background:var(--c-accent); border-radius:2px;
+  content:""; position:absolute; inset:auto .75rem .4rem; height:2px;
+  background:var(--c-accent); border-radius:2px;
 }
 
 /* ==============================
@@ -85,9 +85,7 @@ a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid v
 .my-hero-bg .hero-body{ position:relative; z-index:2; }
 
 .hero-content-card{
-  /* fallback si color-mix non supporté */
   background:rgba(255,246,247,.8);
-  /* version moderne */
   background:color-mix(in hsl, #fff6f7 70%, transparent);
   border:1px solid var(--c-card-border);
   backdrop-filter:blur(6px) saturate(115%);
@@ -113,7 +111,7 @@ a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid v
 /* ==============================
    Cards “Principaux soins”
    ============================== */
-.image-block{ object-fit:cover !important; }
+.image-block{ object-fit:cover; }
 
 .card.highlighted{
   border-radius:var(--radius);
@@ -121,31 +119,25 @@ a:focus-visible, .button:focus-visible, .card:focus-visible{ outline:3px solid v
   background:#fff;
   box-shadow:var(--shadow-m);
   transition:transform .12s ease, box-shadow .12s ease, background .2s ease;
-  display:flex; flex-direction:column; /* clé: étirement vertical */
+  display:flex; flex-direction:column;
 }
 .card.highlighted:hover{ transform:translateY(-2px); box-shadow:var(--shadow-mh); }
-.card .image img{
-  border-top-left-radius:var(--radius);
-  border-top-right-radius:var(--radius);
-}
+.card .image img{ border-radius:var(--radius) var(--radius) 0 0; }
 
 /* Contenu de carte en colonne, chips en bas */
-.card.highlighted .card-content,
-.card.highlighted .media,
-.card.highlighted .media-content{
-  display:flex; flex-direction:column; flex:1;
-}
+.card.highlighted :where(.card-content,.media,.media-content){ display:flex; flex-direction:column; flex:1; }
 .card.highlighted .media-content .subtitle{ flex:1; }
 .card.highlighted .chips-container{ margin-top:auto; }
 
-.price-chip,.duration-chip{
+.price-chip,.duration-chip,.badge-soft,.date-chip{
   display:inline-flex; align-items:center; gap:.4rem;
   border-radius:999px; padding:.25rem .7rem;
   font-weight:600; font-size:.85rem;
-  border:1px solid rgba(67,26,27,.12);
+  border:1px solid var(--c-border-soft);
+  color:var(--c-text);
 }
-.price-chip{ background:var(--c-chip-1); color:var(--c-text); }
-.duration-chip{ background:var(--c-chip-2); color:var(--c-text); }
+.price-chip{ background:var(--c-chip-1); }
+.duration-chip{ background:var(--c-chip-2); }
 .card .subtitle{ color:var(--c-subtitle); }
 
 /* Colonnes Bulma → mêmes hauteurs + cartes qui remplissent */
@@ -164,13 +156,112 @@ footer.footer a:hover{ color:#7a3a3b; }
 
 /* ==============================
    Anciennes classes conservées
-   (compat & héritage)
    ============================== */
-.highlighted{ background:#eddad5; }   /* utilisé ailleurs ? ok de garder */
-.footer-old{ background:#f0e8e6; }    /* si besoin d’un fallback */
+.highlighted{ background:#eddad5; }
+.footer-old{ background:#f0e8e6; }
 
 /* ==============================
-   Responsive
+   Soins page
+   ============================== */
+.soins-subnav{
+  position:sticky; top:70px; z-index:10;
+  background:var(--c-bg);
+  border:1px solid var(--c-card-border);
+  border-radius:var(--radius);
+  padding:.5rem .75rem;
+  box-shadow:0 8px 20px var(--c-card-shadow);
+  overflow-x:auto; white-space:nowrap;
+}
+.soins-subnav a{
+  display:inline-block; margin:.25rem .4rem; padding:.35rem .7rem;
+  border-radius:999px; border:1px solid var(--c-border-soft);
+  color:var(--c-text);
+}
+
+.soins-card{
+  border-radius:var(--radius);
+  border:1px solid var(--c-card-border);
+  background:#fff;
+  box-shadow:var(--shadow-m);
+  overflow:hidden;
+  /* grid appliquée ≥769px, sinon bloc */
+}
+.soins-card + .soins-card{ margin-top:1.5rem; }
+
+.soins-card .soins-cover{ width:100%; height:100%; }
+.soins-card .soins-cover img{ width:100%; height:100%; display:block; object-fit:cover; }
+.soins-card .soins-body{ padding:1.25rem; }
+
+.soins-meta{ display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
+.soins-cta{ margin-top:1rem; }
+
+/* Images: ratio mobile */
+@media (max-width:768px){
+  .soins-card .soins-cover{ aspect-ratio:3/2; }
+}
+
+/* ≥ tablet : grille + hauteur d’image fixe */
+@media (min-width:769px){
+  .soins-card{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:start;
+  }
+  .soins-card.alt{ grid-template-columns:1fr 1fr; }
+  .soins-card.alt .soins-cover{ order:2; }
+  .soins-card.alt .soins-body{  order:1; }
+  .soins-card .soins-cover{ height:clamp(240px,34vh,360px); }
+}
+
+/* ==============================
+   Formations
+   ============================== */
+.formations{ margin-top:1rem; }
+
+.formations-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:1.25rem;
+}
+@media (min-width:1280px){ .formations-grid{ gap:1.5rem; } }
+
+.form-card{
+  background:#fff; border:1px solid var(--c-card-border);
+  border-radius:var(--radius);
+  padding:1.25rem;
+  box-shadow:0 10px 24px var(--c-card-shadow);
+  display:grid; row-gap:.55rem;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.form-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-mh); }
+
+.form-head{ display:flex; align-items:center; gap:1rem; }
+.form-title{
+  font-weight:800; font-size:1.075rem; letter-spacing:-.01em;
+  line-height:1.35; color:var(--c-text);
+}
+.form-org{ color:var(--c-subtitle); line-height:1.6; font-size:.98rem; }
+
+.date-chip{
+  margin-left:auto; padding:.35rem .7rem;
+  background:var(--c-chip-1);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);
+  white-space:nowrap;
+}
+
+@media (max-width:480px){
+  .form-card{ padding:1rem; }
+  .form-title{ font-size:1.02rem; }
+  .date-chip{ font-size:.85rem; padding:.25rem .55rem; }
+}
+
+/* Respecte le confort des personnes sensibles aux animations */
+@media (prefers-reduced-motion:reduce){
+  .form-card{ transition:none; }
+}
+
+/* ==============================
+   Responsive divers
    ============================== */
 @media (max-width:768px){
   .navbar .navbar-menu{ backdrop-filter:none; }
@@ -180,121 +271,4 @@ footer.footer a:hover{ color:#7a3a3b; }
   .my-hero-bg::before{ opacity:.7; }
   .hero-content-card{ padding:16px; border-radius:var(--radius-sm); }
   .card.highlighted{ box-shadow:0 8px 18px var(--c-card-shadow); }
-}
-
-/* ==============================
-   Petites teintes utilitaires
-   ============================== */
-.navbar-menu.is-active{ background:var(--c-accent); }
-
-/* ===== Soins page ===== */
-.soins-subnav {
-  position: sticky; top: 70px; z-index: 10;
-  background: var(--c-bg);
-  border: 1px solid var(--c-card-border);
-  border-radius: var(--radius);
-  padding: .5rem .75rem;
-  box-shadow: 0 8px 20px var(--c-card-shadow);
-  overflow-x: auto; white-space: nowrap;
-}
-.soins-subnav a {
-  display:inline-block; margin:.25rem .4rem; padding:.35rem .7rem;
-  border-radius:999px; border:1px solid rgba(67,26,27,.12);
-  color: var(--c-text);
-}
-.soins-card {
-  border-radius: var(--radius);
-  border: 1px solid var(--c-card-border);
-  background: #fff;
-  box-shadow: var(--shadow-m);
-  overflow: hidden;
-}
-.soins-card .soins-cover img { width:100%; height:auto; display:block; }
-.soins-card .soins-body { padding: 1.25rem; }
-.soins-meta { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
-.soins-cta { margin-top: 1rem; }
-.soins-card + .soins-card { margin-top: 1.5rem; }
-
-/* version media side-by-side sur >= tablet */
-@media (min-width: 769px){
-  .soins-card { display:grid; grid-template-columns: 1.1fr 1.4fr; }
-  .soins-card.alt { grid-template-columns: 1.4fr 1.1fr; }
-  .soins-card .soins-cover { height: 100%; }
-  .soins-card .soins-cover img { height:100%; object-fit:cover; }
-}
-
-/* petites puces */
-.badge-soft{
-  display:inline-flex; align-items:center; gap:.35rem;
-  border-radius:999px; padding:.25rem .6rem; font-weight:600; font-size:.85rem;
-  border:1px solid rgba(67,26,27,.12); background:#fffaf9; color:var(--c-text);
-}
-
-/* ===== Soins page ===== */
-.soins-subnav {
-  position: sticky; top: 70px; z-index: 10;
-  background: var(--c-bg);
-  border: 1px solid var(--c-card-border);
-  border-radius: var(--radius);
-  padding: .5rem .75rem;
-  box-shadow: 0 8px 20px var(--c-card-shadow);
-  overflow-x: auto; white-space: nowrap;
-}
-.soins-subnav a {
-  display:inline-block; margin:.25rem .4rem; padding:.35rem .7rem;
-  border-radius:999px; border:1px solid rgba(67,26,27,.12);
-  color: var(--c-text);
-}
-
-.soins-card {
-  border-radius: var(--radius);
-  border: 1px solid var(--c-card-border);
-  background: #fff;
-  box-shadow: var(--shadow-m);
-  overflow: hidden;
-}
-
-/* Images: mêmes dimensions partout */
-.soins-card .soins-cover { width:100%; }
-.soins-card .soins-cover img { width:100%; height:100%; display:block; object-fit:cover; }
-
-.soins-card .soins-body { padding: 1.25rem; }
-.soins-meta { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
-.soins-cta { margin-top: 1rem; }
-.soins-card + .soins-card { margin-top: 1.5rem; }
-
-/* Mobile: image en 3/2 */
-@media (max-width: 768px){
-  .soins-card .soins-cover { aspect-ratio: 3 / 2; }
-}
-
-/* ≥ tablet : grille + hauteur d’image fixe */
-@media (min-width: 769px){
-  .soins-card { display:grid; grid-template-columns: 1.1fr 1.4fr; align-items:start; }
-  .soins-card.alt { grid-template-columns: 1.4fr 1.1fr; }
-  /* Fixe la hauteur de l'image (à ajuster si tu veux) */
-  .soins-card .soins-cover { height: clamp(240px, 34vh, 360px); }
-}
-/* ≥ tablet : grille avec largeurs identiques */
-@media (min-width: 769px){
-  .soins-card{
-    display:grid;
-    grid-template-columns: 1fr 1fr;     /* même largeur */
-    align-items:start;
-  }
-  .soins-card.alt{
-    grid-template-columns: 1fr 1fr;     /* idem (pas nécessaire mais explicite) */
-  }
-  /* alterne l'ordre visuel sans changer la largeur des colonnes */
-  .soins-card.alt .soins-cover{ order:2; }
-  .soins-card.alt .soins-body{  order:1; }
-
-  /* hauteur d'image fixe déjà OK chez toi */
-  .soins-card .soins-cover{ height: clamp(240px, 34vh, 360px); }
-}
-
-/* s'assurer que l'image remplit toute la colonne */
-.soins-card .soins-cover{ width:100%; }
-.soins-card .soins-cover img{
-  display:block; width:100%; height:100%; object-fit:cover;
 }
