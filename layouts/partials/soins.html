@@ -6,8 +6,7 @@
     {{ range where .Site.RegularPages "Params.highlighted" true }}
       <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
         <a href="/soins/#{{ .Title | urlize }}">
-          <div class="card highlighted">
-
+          <div class="card highlighted" tabindex="0">
             {{/* ==== IMAGES RESPONSIVES (AVIF + WebP) ==== */}}
             {{ $imagePath := printf "images/%s" .Params.pic }}
             {{ $src := resources.Get $imagePath }}
@@ -52,6 +51,12 @@
                 <div class="media-content">
                   <p class="title is-4"><b>{{ .Title }}</b></p>
                   <p class="subtitle is-6">{{ with .Params.description }}{{ . }}{{ end }}</p>
+
+                  <!-- Conteneur dédié pour pousser les chips en bas -->
+                  <div class="chips-container is-flex is-align-items-center is-flex-wrap-wrap" style="gap:.5rem;">
+                    {{ with .Params.duration }}<span class="duration-chip">⏱ {{ . }}</span>{{ end }}
+                    {{ with .Params.price }}<span class="price-chip">{{ . }} €</span>{{ end }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -61,7 +66,7 @@
     {{ end }}
   </div>
 
-  <a href="/soins">
-    <button class="button is-primary is-rounded">En savoir plus</button>
-  </a>
+  <section class="section has-text-centered" style="padding-top:0;">
+    <a class="button is-text" href="/soins">Tous les soins &amp; tarifs</a>
+  </section>
 </section>
