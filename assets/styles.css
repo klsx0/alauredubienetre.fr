@@ -229,3 +229,72 @@ footer.footer a:hover{ color:#7a3a3b; }
   border-radius:999px; padding:.25rem .6rem; font-weight:600; font-size:.85rem;
   border:1px solid rgba(67,26,27,.12); background:#fffaf9; color:var(--c-text);
 }
+
+/* ===== Soins page ===== */
+.soins-subnav {
+  position: sticky; top: 70px; z-index: 10;
+  background: var(--c-bg);
+  border: 1px solid var(--c-card-border);
+  border-radius: var(--radius);
+  padding: .5rem .75rem;
+  box-shadow: 0 8px 20px var(--c-card-shadow);
+  overflow-x: auto; white-space: nowrap;
+}
+.soins-subnav a {
+  display:inline-block; margin:.25rem .4rem; padding:.35rem .7rem;
+  border-radius:999px; border:1px solid rgba(67,26,27,.12);
+  color: var(--c-text);
+}
+
+.soins-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--c-card-border);
+  background: #fff;
+  box-shadow: var(--shadow-m);
+  overflow: hidden;
+}
+
+/* Images: mêmes dimensions partout */
+.soins-card .soins-cover { width:100%; }
+.soins-card .soins-cover img { width:100%; height:100%; display:block; object-fit:cover; }
+
+.soins-card .soins-body { padding: 1.25rem; }
+.soins-meta { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
+.soins-cta { margin-top: 1rem; }
+.soins-card + .soins-card { margin-top: 1.5rem; }
+
+/* Mobile: image en 3/2 */
+@media (max-width: 768px){
+  .soins-card .soins-cover { aspect-ratio: 3 / 2; }
+}
+
+/* ≥ tablet : grille + hauteur d’image fixe */
+@media (min-width: 769px){
+  .soins-card { display:grid; grid-template-columns: 1.1fr 1.4fr; align-items:start; }
+  .soins-card.alt { grid-template-columns: 1.4fr 1.1fr; }
+  /* Fixe la hauteur de l'image (à ajuster si tu veux) */
+  .soins-card .soins-cover { height: clamp(240px, 34vh, 360px); }
+}
+/* ≥ tablet : grille avec largeurs identiques */
+@media (min-width: 769px){
+  .soins-card{
+    display:grid;
+    grid-template-columns: 1fr 1fr;     /* même largeur */
+    align-items:start;
+  }
+  .soins-card.alt{
+    grid-template-columns: 1fr 1fr;     /* idem (pas nécessaire mais explicite) */
+  }
+  /* alterne l'ordre visuel sans changer la largeur des colonnes */
+  .soins-card.alt .soins-cover{ order:2; }
+  .soins-card.alt .soins-body{  order:1; }
+
+  /* hauteur d'image fixe déjà OK chez toi */
+  .soins-card .soins-cover{ height: clamp(240px, 34vh, 360px); }
+}
+
+/* s'assurer que l'image remplit toute la colonne */
+.soins-card .soins-cover{ width:100%; }
+.soins-card .soins-cover img{
+  display:block; width:100%; height:100%; object-fit:cover;
+}
