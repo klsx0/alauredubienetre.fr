@@ -4,22 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="{{ .Permalink }}">
-    {{ $bulma := resources.GetRemote "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" | resources.Minify | resources.Fingerprint }}
-    {{ $app   := resources.Get "styles.css" | resources.Minify | resources.Fingerprint }}
 
-    <!-- Bulma : préchargé puis appliqué (réduit le blocking time) -->
-    <link rel="preload" as="style"
-          href="{{ $bulma.RelPermalink }}"
-          integrity="{{ $bulma.Data.Integrity }}"
-          crossorigin>
+    {{/* Compile Bulma custom depuis node_modules avec la nouvelle API css.Sass */}}
+    {{ $bulma := resources.Get "bulma-custom.scss" |
+      css.Sass (dict
+        "transpiler"   "dartsass"
+        "includePaths" (slice "node_modules")
+        "outputStyle"  "compressed"
+        "targetPath"   "css/bulma.css"
+      ) | resources.Fingerprint }}
+
+    {{/* Ton CSS applicatif */}}
+    {{ $app := resources.Get "styles.css" | resources.Minify | resources.Fingerprint }}
+
+    <link rel="preload" as="style" href="{{ $bulma.RelPermalink }}">
     <link rel="stylesheet"
           href="{{ $bulma.RelPermalink }}"
           integrity="{{ $bulma.Data.Integrity }}"
           crossorigin>
 
-    <!-- Ton CSS : préchargé + fingerprint pour cache long -->
     <link rel="preload" as="style" href="{{ $app.RelPermalink }}">
-    <link rel="stylesheet" href="{{ $app.RelPermalink }}">
+    <link rel="stylesheet"
+          href="{{ $app.RelPermalink }}"
+          integrity="{{ $app.Data.Integrity }}">
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
