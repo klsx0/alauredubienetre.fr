@@ -13,6 +13,12 @@
     <title>{{ block "title" . }}
       {{ .Site.Title }}
     {{ end }}</title>
+    <meta name="description" content="Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte. Réservation et infos tarifs.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="{{ .Site.Title }}">
+    <meta property="og:description" content="Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte.">
+    <meta property="og:url" content="{{ .Site.BaseURL }}">
   </head>
   <body>
     {{ partial "navbar.html" . }}

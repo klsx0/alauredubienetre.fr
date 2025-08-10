@@ -1,10 +1,9 @@
 .fond-0 {
-    background: hsla(357, 70%, 95%,1);
-    opacity: 55%;
-    border-radius: 45px;
-    margin-top: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
+    background: hsla(357, 70%, 95%, 0.9);
+    backdrop-filter: saturate(120%) blur(6px);
+    border-radius: 0;
+    margin: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
   }
 
   .my-hero-bg {
@@ -38,11 +37,10 @@
   
   /* Use viewport width units for the logo height */
   .navbar-brand .navbar-item img {
-    max-height: none;
-    height: 6vw;  /* 10% of the viewport width */
-    margin-top: -1vw;
-    margin-bottom: -1vw;
+    height: clamp(36px, 5vw, 56px);
+    max-height: 56px;
     width: auto;
+    margin: 0;
   }
 
   .title {

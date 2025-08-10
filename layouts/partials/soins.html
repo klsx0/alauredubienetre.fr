@@ -6,12 +6,16 @@
         <div class="column">
             <a href="/soins/#{{ .Title }}" >
                 <div class="card highlighted">
-                    {{ $imagePath := printf "/%s" .Params.pic }}
+                    {{ $imagePath := printf "images/%s" .Params.pic }}
                     {{ $asset := resources.Get $imagePath }}
-                    {{ $img := $asset.Resize "x600 webp picture" }}
+                    {{ $img := cond (not (eq $asset nil)) ($asset.Resize "x600 webp picture") nil }}
                     <div class="card-image">
                         <figure class="image is-3by1 article">
-                            <img class="image-block has-ratio" src="{{ $img.RelPermalink }}" alt="Placeholder image">
+                            {{ if $img }}
++                              <img class="image-block has-ratio" src="{{ $img.RelPermalink }}" alt="{{ .Title }}">
++                            {{ else }}
++                              <img class="image-block has-ratio" src="{{ printf "/%s" .Params.pic | relURL }}" alt="{{ .Title }}">
++                            {{ end }}
                         </figure>
                     </div>
                     <div class="card-content">
