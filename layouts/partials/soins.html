@@ -1,34 +1,57 @@
 <section class="section has-text-centered">
-    <h1 class="title">Principaux soins</h1>
-    <h2 class="subtitle">De véritables soins personnalisés conçus pour votre bien-être</h2>
-    <div class="columns  is-multiline">
+  <h1 class="title">Principaux soins</h1>
+  <h2 class="subtitle">De véritables soins personnalisés conçus pour votre bien-être</h2>
+
+  <div class="columns is-multiline is-variable is-5">
     {{ range where .Site.RegularPages "Params.highlighted" true }}
-        <div class="column">
-            <a href="/soins/#{{ .Title }}" >
-                <div class="card highlighted">
-                    {{ $imagePath := printf "/%s" .Params.pic }}
-                    {{ $asset := resources.Get $imagePath }}
-                    {{ $img := $asset.Resize "x600 webp picture" }}
-                    <div class="card-image">
-                        <figure class="image is-3by1 article">
-                            <img class="image-block has-ratio" src="{{ $img.RelPermalink }}" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4"><b>{{ .Title }}</b>
-                                </p>
-                                <p class="subtitle is-6">{{ .Params.description }}</p>
-                            </div>
-                        </div>
-                    </div>
+      <div class="column is-one-third-desktop is-half-tablet is-full-mobile">
+        <a href="/soins/#{{ .Title | urlize }}">
+          <div class="card highlighted">
+            {{ $imagePath := printf "images/%s" .Params.pic }}
+            {{ $asset := resources.Get $imagePath }}
+            {{ $img := cond (not (eq $asset nil)) ($asset.Resize "900x webp picture") nil }}
+
+            <div class="card-image">
+              <figure class="image is-3by2 article">
+                {{ if $img }}
+                  <img
+                    class="image-block has-ratio"
+                    src="{{ $img.RelPermalink }}"
+                    alt="{{ .Title }}"
+                    loading="lazy"
+                    decoding="async"
+                    width="{{ $img.Width }}"
+                    height="{{ $img.Height }}">
+                {{ else }}
+                  <img
+                    class="image-block has-ratio"
+                    src="{{ printf "/%s" .Params.pic | relURL }}"
+                    alt="{{ .Title }}"
+                    loading="lazy"
+                    decoding="async">
+                {{ end }}
+              </figure>
+            </div>
+
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-4">
+                    <b>{{ .Title }}</b>
+                  </p>
+                  <p class="subtitle is-6">
+                    {{ with .Params.description }}{{ . }}{{ end }}
+                  </p>
                 </div>
-            </a>
-        </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
     {{ end }}
-    </div>
-    <a href="/soins">
-        <button class="button  is-primary is-rounded">En savoir plus</button>
-    </a>
+  </div>
+
+  <a href="/soins">
+    <button class="button is-primary is-rounded">En savoir plus</button>
+  </a>
 </section>

@@ -1,99 +1,106 @@
 .fond-0 {
-    background: hsla(357, 70%, 95%,1);
-    opacity: 55%;
-    border-radius: 45px;
-    margin-top: 20px;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
+  background: hsla(357, 70%, 95%, 0.9);
+  /* Evite le blur coûteux sur mobiles */
+  backdrop-filter: saturate(120%) blur(4px);
+  border-radius: 0;
+  margin: 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
 
-  .my-hero-bg {
-    background: url('/bg-hero.webp') center center no-repeat;
-    background-size: cover;
-    position: relative;
-  }
+.my-hero-bg {
+  background: url('/bg-hero.webp') center center no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
-  .my-hero-bg::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(
-      hsla(0, 69%, 95%, 1),
-      hsla(337, 69%, 71%, 0.46)
-    );
-    opacity: 0.64;
-  }
+.my-hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    hsla(0, 69%, 95%, 1),
+    hsla(337, 69%, 71%, 0.46)
+  );
+  opacity: 0.64;
+}
 
-  .my-hero-bg .hero-body {
-    position: relative; /* Keep text above the overlay */
-    z-index: 1;
-  }
-  .navbar {
-    overflow: visible !important;
-  }
-  
-  .navbar-brand .navbar-item {
-    overflow: visible;
-  }
-  
-  /* Use viewport width units for the logo height */
-  .navbar-brand .navbar-item img {
-    max-height: none;
-    height: 6vw;  /* 10% of the viewport width */
-    margin-top: -1vw;
-    margin-bottom: -1vw;
-    width: auto;
-  }
+.my-hero-bg .hero-body {
+  position: relative; /* Keep text above the overlay */
+  z-index: 1;
+}
 
-  .title {
-    margin-bottom: 3vw !important;
-  }
-  .subtitle {
-    margin-bottom: 1vw !important;
-  }
-  .title, .subtitle, .navbar-text {
-    color: #431A1B;
-  }
+.navbar { overflow: visible !important; }
+.navbar-brand .navbar-item { overflow: visible; }
 
-  .button {
-    background-color: #e6cdc7;
-  }
-  .button.is-outlined {
-    border-color: #e6cdc7;
-    color: #e6cdc7;
-  }
+/* Use viewport width units for the logo height */
+.navbar-brand .navbar-item img {
+  height: clamp(36px, 5vw, 56px);
+  max-height: 56px;
+  width: auto;
+  margin: 0;
+}
 
-  html {
-    scrollbar-face-color: #431a1b;
-    scrollbar-base-color: #431a1b;
-    scrollbar-3dlight-color: #431a1b;
-    scrollbar-highlight-color: #431a1b;
-    scrollbar-track-color: #e8c3be;
-    scrollbar-arrow-color: #e8c3be;
-    scrollbar-shadow-color: #431a1b;
-  }
-  
-  ::-webkit-scrollbar { width: 12px; height: 3px;}
+.title { margin-bottom: 1rem !important; }
+.subtitle { margin-bottom: .75rem !important; }
+
+.title, .subtitle, .navbar-text { color: #431A1B; }
+
+.button { background-color: #e6cdc7; }
+.button.is-outlined { border-color: #e6cdc7; color: #e6cdc7; }
+
+html {
+  scrollbar-face-color: #431a1b;
+  scrollbar-base-color: #431a1b;
+  scrollbar-3dlight-color: #431a1b;
+  scrollbar-highlight-color: #431a1b;
+  scrollbar-track-color: #e8c3be;
+  scrollbar-arrow-color: #e8c3be;
+  scrollbar-shadow-color: #431a1b;
+}
+
+::-webkit-scrollbar { width: 12px; height: 3px;}
 ::-webkit-scrollbar-track {  background-color: #431a1b;}
 ::-webkit-scrollbar-track-piece { background-color: #e8c3be;}
 ::-webkit-scrollbar-thumb { height: 50px; background-color: #431a1b; border-radius: 3px;}
 ::-webkit-scrollbar-corner { background-color: #431a1b;}
 ::-webkit-resizer { background-color: #431a1b;}
 
-.footer {
-  background: #f0e8e6;
+.footer { background: #f0e8e6; }
+
+.image-block { object-fit: cover !important; }
+.card { height: 100% !important; }
+.highlighted { background: #eddad5; }
+
+html { background: #fff6f7; }
+
+/* --- Mobile tweaks --- */
+@media (max-width: 768px) {
+  .navbar .navbar-menu { backdrop-filter: none; }
+  .hero .title { font-size: 1.75rem; line-height: 1.2; }
+  .hero .subtitle { font-size: 1rem; }
+  .buttons.is-mobile-stack .button { width: 100%; }
+  .my-hero-bg::before { opacity: 0.7; } /* lisibilité sur petits écrans */
 }
 
-.image-block {
-  object-fit: cover !important;
-}
-.card {
-  height: 100% !important;
-}
-.highlighted {
-  background: #eddad5;
+/* Améliore le focus clavier */
+:focus-visible {
+  outline: 3px solid #431A1B;
+  outline-offset: 2px;
 }
 
-html {
-  background: #fff6f7;
+.navbar-menu.is-active {
+  /* Styles quand le burger est ouvert */
+  background: #e6cdc7;
+}
+
+footer.footer a {
+  color: #431A1B;
+  text-decoration: underline;
+}
+footer.footer a:hover {
+  color: #7a3a3b;
+}
+
+.navbar-burger {
+  color: #431A1B;
 }

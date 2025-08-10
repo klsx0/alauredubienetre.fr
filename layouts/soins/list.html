@@ -1,25 +1,31 @@
 {{ define "main" }}
-<section class="section">
-</section>
+<section class="section"></section>
+
 {{ range .Pages }}
-<section class="section">
-    
-    <h1 class="title" id="{{ .Title }}">{{ .Title }}</h1>
+  <section class="section">
+    <h1 class="title" id="{{ .Title | urlize }}">{{ .Title }}</h1>
+
     <h2 class="subtitle">
-        {{ .Params.Description }}
+      {{ .Params.description }}
     </h2>
+
     <div class="content">
-        Bénéfices:
-        <ul>
-            {{ range .Params.benefits }}
-            <li>
-                {{ . }}
-            </li>
-            {{ end }}
-        </ul>
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        {{ range .Params.benefits }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
     </div>
-    {{ .Params.duration }} - {{ .Params.price }} €
-</section>
+
+    <p>
+      <span class="tag is-light">{{ .Params.duration }}</span>
+      <span class="tag is-link is-light">{{ .Params.price }} €</span>
+    </p>
+  </section>
 {{ end }}
 
+<section class="section has-text-centered">
+  <p><em>Règlement accepté : chèque ou espèces.</em></p>
+</section>
 {{ end }}
