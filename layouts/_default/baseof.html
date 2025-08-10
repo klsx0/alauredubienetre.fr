@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html data-theme="light">
+<html data-theme="light" lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ .Permalink }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <link rel="stylesheet" href="/styles.css">
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -26,5 +27,19 @@
       <!-- The part of the page that begins to differ between templates -->
     {{ end }}
     {{ partial "footer.html" . }}
+    <script>
+      // Minimal Bulma burger
+      document.addEventListener('DOMContentLoaded', () => {
+        const burgers = Array.from(document.querySelectorAll('.navbar-burger'));
+        burgers.forEach(b => {
+          b.addEventListener('click', () => {
+            const target = b.dataset.target;
+            const menu = document.getElementById(target);
+            b.classList.toggle('is-active');
+            menu?.classList.toggle('is-active');
+          });
+        });
+      });
+    </script>
   </body>
 </html>

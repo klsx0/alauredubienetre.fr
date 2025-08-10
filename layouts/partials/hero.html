@@ -1,16 +1,14 @@
 <section class="hero is-link is-fullheight-with-navbar my-hero-bg">
     <div class="hero-body">
-        <div>
-            <p class="title"><b>{{ .Title }}</b></p>
-            <p class="subtitle"><i>Votre espace de massage et de bien-être à Villeneuve-sur-Lot,<br> où chaque soin est une invitation à un voyage sensoriel.</i></p>
-            <p class="buttons">
-                <a href="/#contact">
-                    <button class="button  is-primary is-rounded">Contact</button>
-                </a>
-                <a href="/soins">
-                    <button class="button  is-primary is-rounded is-outlined">Nos Massages</button>
-                </a>
-            </p>
+        <div class="container">
+          <p class="title"><b>{{ .Title }}</b></p>
+          <p class="subtitle">
+            <i>Votre espace de massage et de bien-être à Villeneuve-sur-Lot,<br class="is-hidden-mobile"> où chaque soin est une invitation à un voyage sensoriel.</i>
+          </p>
+          <div class="buttons is-flex is-flex-direction-column is-align-items-flex-start is-gap-2 is-mobile-stack">
+            <a class="button is-primary is-rounded" href="/#contact">Contact</a>
+            <a class="button is-primary is-rounded is-outlined" href="/soins">Nos Massages</a>
+          </div>
         </div>
     </div>
 </section>
