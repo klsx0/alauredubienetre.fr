@@ -1,14 +1,59 @@
 <section class="hero is-link is-fullheight-with-navbar my-hero-bg">
-    <div class="hero-body">
-        <div class="container">
-          <p class="title"><b>{{ .Title }}</b></p>
-          <p class="subtitle">
-            <i>Votre espace de massage et de bien-être à Villeneuve-sur-Lot,<br class="is-hidden-mobile"> où chaque soin est une invitation à un voyage sensoriel.</i>
-          </p>
-          <div class="buttons is-flex is-flex-direction-column is-align-items-flex-start is-gap-2 is-mobile-stack">
-            <a class="button is-primary is-rounded" href="/#contact">Contact</a>
-            <a class="button is-primary is-rounded is-outlined" href="/soins">Nos Massages</a>
-          </div>
-        </div>
+  {{ $src := resources.Get "images/bg-hero.jpg" }}
+  {{ if not $src }}{{ $src = resources.Get "images/bg-hero.png" }}{{ end }}
+
+  {{ if $src }}
+    {{ $avif480  := $src.Fit "480x avif" }}
+    {{ $avif768  := $src.Fit "768x avif" }}
+    {{ $avif1280 := $src.Fit "1280x avif" }}
+    {{ $avif1536 := $src.Fit "1536x avif" }}
+    {{ $webp480  := $src.Fit "480x webp" }}
+    {{ $webp768  := $src.Fit "768x webp" }}
+    {{ $webp1280 := $src.Fit "1280x webp" }}
+    {{ $webp1536 := $src.Fit "1536x webp" }}
+
+    <!-- Précharge une taille mobile pertinente ; fetchpriorité haute pour booster le LCP -->
+    <link rel="preload" as="image"
+          href="{{ $webp768.RelPermalink }}"
+          imagesrcset="{{ $avif480.RelPermalink }} 480w, {{ $avif768.RelPermalink }} 768w, {{ $avif1280.RelPermalink }} 1280w, {{ $avif1536.RelPermalink }} 1536w"
+          imagesizes="100vw"
+          fetchpriority="high">
+  {{ end }}
+
+  <!-- Calque image de fond -->
+  <div class="hero-bg-wrap" aria-hidden="true">
+    {{ if $src }}
+      <picture>
+        <source type="image/avif"
+                srcset="{{ $avif480.RelPermalink }} 480w, {{ $avif768.RelPermalink }} 768w, {{ $avif1280.RelPermalink }} 1280w, {{ $avif1536.RelPermalink }} 1536w"
+                sizes="100vw">
+        <source type="image/webp"
+                srcset="{{ $webp480.RelPermalink }} 480w, {{ $webp768.RelPermalink }} 768w, {{ $webp1280.RelPermalink }} 1280w, {{ $webp1536.RelPermalink }} 1536w"
+                sizes="100vw">
+        <img class="hero-bg-img"
+             src="{{ $webp768.RelPermalink }}"
+             alt=""
+             width="{{ $webp1536.Width }}"
+             height="{{ $webp1536.Height }}"
+             decoding="async"
+             fetchpriority="high">
+      </picture>
+    {{ else }}
+      <!-- Fallback si l'image n'est pas dans assets/ -->
+      <img class="hero-bg-img" src="/bg-hero.webp" alt="" decoding="async" fetchpriority="high">
+    {{ end }}
+  </div>
+
+  <div class="hero-body">
+    <div class="container">
+      <p class="title"><b>{{ .Title }}</b></p>
+      <p class="subtitle">
+        <i>Votre espace de massage et de bien-être à Villeneuve-sur-Lot,<br class="is-hidden-mobile"> où chaque soin est une invitation à un voyage sensoriel.</i>
+      </p>
+      <div class="buttons is-flex is-flex-direction-column is-align-items-flex-start is-gap-2 is-mobile-stack">
+        <a class="button is-primary is-rounded" href="/#contact">Contact</a>
+        <a class="button is-primary is-rounded is-outlined" href="/soins">Nos Massages</a>
+      </div>
     </div>
+  </div>
 </section>
