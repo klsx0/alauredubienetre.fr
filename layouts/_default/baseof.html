@@ -20,20 +20,60 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte. Réservation et infos tarifs.">
+    {{/* -------- SEO: Title + Description dynamiques -------- */}}
+    {{ $defaultDesc := "Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte, Thérapie Sipho. Réservation et infos tarifs." }}
+    {{ $desc := cond (ne (or .Description "") "") .Description $defaultDesc }}
+
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ $desc }}">
+
+    {{/* OpenGraph */}}
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
-    <meta property="og:title" content="{{ .Site.Title }}">
-    <meta property="og:description" content="Massages bien-être à Villeneuve-sur-Lot : Aromatouch, Amma assis, Rebozo, Massage femme enceinte.">
-    <meta property="og:url" content="{{ .Site.BaseURL }}">
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+    <meta property="og:description" content="{{ $desc }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    {{ with .Site.Params.ogImage }}<meta property="og:image" content="{{ . }}">{{ end }}
+
+    {{/* Twitter Card */}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+    <meta name="twitter:description" content="{{ $desc }}">
+    {{ with .Site.Params.ogImage }}<meta name="twitter:image" content="{{ . }}">{{ end }}
   </head>
-  <body>
+  <body class="has-navbar-fixed-top">
     {{ partial "navbar.html" . }}
     {{ block "main" . }}
       <!-- The part of the page that begins to differ between templates -->
     {{ end }}
     {{ partial "footer.html" . }}
+
+    {{/* -------- JSON-LD : LocalBusiness (global, une seule fois) -------- */}}
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"HealthAndBeautyBusiness",
+      "name":"{{ .Site.Params.business_name }}",
+      "url":"{{ .Site.BaseURL }}",
+      "image":"{{ .Site.BaseURL }}logo.png",
+      "email":"{{ .Site.Params.email }}",
+      "telephone":"{{ .Site.Params.phone }}",
+      "priceRange":"{{ .Site.Params.priceRange }}",
+      "identifier": "{{ .Site.Params.siret }}",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"{{ .Site.Params.streetAddress }}",
+        "addressLocality":"{{ .Site.Params.city }}",
+        "postalCode":"{{ .Site.Params.postalCode }}",
+        "addressCountry":"{{ .Site.Params.country }}"
+      },
+      "geo":{
+        "@type":"GeoCoordinates",
+        "latitude": {{ .Site.Params.geo.lat }},
+        "longitude": {{ .Site.Params.geo.lng }}
+      }
+    }
+    </script>
 
     <script defer>
       // Minimal Bulma burger
@@ -49,5 +89,16 @@
         });
       });
     </script>
+    <script>
+      // Caler la variable CSS --nav-h sur la hauteur réelle de la navbar (desktop/mobile)
+      function updateNavHeight() {
+        const nav = document.querySelector('.navbar');
+        if (!nav) return;
+        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+      window.addEventListener('load', updateNavHeight);
+      window.addEventListener('resize', updateNavHeight);
+    </script>
+
   </body>
 </html>

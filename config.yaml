@@ -2,3 +2,20 @@ baseURL: https://www.alauredubienetre.fr/
 languageCode: fr-fr
 title: A l'Auré du Bien Etre
 enableRobotsTXT: true
+
+# Données utilisées pour le SEO & JSON-LD
+params:
+  business_name: "A l'Auré du Bien Être – Aurélie Fabre"
+  email: "alauredubien.etre@gmail.com"
+  phone: "+33620123650"
+  siret: "98363520200028"
+  tva: "Non assujettie à la TVA"
+  payment: "chèque ou espèces"
+  streetAddress: "5 Av. de Lattre de Tassigny"
+  city: "Villeneuve-sur-Lot"
+  postalCode: "47300"
+  country: "FR"
+  priceRange: "€€"
+  geo:
+    lat: 44.408
+    lng: 0.705

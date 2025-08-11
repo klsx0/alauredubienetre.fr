@@ -4,6 +4,18 @@
     <h1 class="title">Prestations et tarifs</h1>
     <h2 class="subtitle">Choisissez le soin qui vous correspond, puis contactez-moi pour réserver.</h2>
 
+    <!-- BreadcrumbList JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        { "@type":"ListItem","position":1,"name":"Accueil","item":"{{ .Site.BaseURL }}" },
+        { "@type":"ListItem","position":2,"name":"Soins","item":"{{ .Permalink }}" }
+      ]
+    }
+    </script>
+
     <!-- Sous-navigation collante -->
     <div class="soins-subnav">
       {{ range .Pages }}
@@ -12,9 +24,11 @@
     </div>
   </div>
 </section>
+
 <div class="has-text-centered">
-  <p><em>Règlement accepté : chèque ou espèces.</em></p>
+  <p><em>Règlement accepté : {{ .Site.Params.payment | default "chèque ou espèces" }}.</em></p>
 </div>
+
 {{ $i := 0 }}
 {{ range .Pages }}
   {{ $i = add $i 1 }}
@@ -25,7 +39,6 @@
       <article class="soins-card {{ if eq $alt 0 }}alt{{ end }}">
         <!-- Couverture -->
         <div class="soins-cover">
-          {{/* essaie d'abord assets/images/<pic> sinon /static/<pic> */}}
           {{ $pic := .Params.pic }}
           {{ if $pic }}
             {{ $path := printf "images/%s" $pic }}
@@ -36,13 +49,17 @@
               <picture>
                 <source type="image/avif" srcset="{{ $avif.RelPermalink }}">
                 <source type="image/webp" srcset="{{ $webp.RelPermalink }}">
-                <img src="{{ $webp.RelPermalink }}" alt="{{ .Title }}" loading="lazy" decoding="async" width="{{ $webp.Width }}" height="{{ $webp.Height }}">
+                <img src="{{ $webp.RelPermalink }}"
+                     alt="{{ with .Params.alt }}{{ . }}{{ else }}{{ .Title }} à Villeneuve-sur-Lot{{ end }}"
+                     loading="lazy" decoding="async"
+                     width="{{ $webp.Width }}" height="{{ $webp.Height }}">
               </picture>
             {{ else }}
-              <img src="{{ printf "/%s" $pic | relURL }}" alt="{{ .Title }}" loading="lazy" decoding="async">
+              <img src="{{ printf "/%s" $pic | relURL }}"
+                   alt="{{ with .Params.alt }}{{ . }}{{ else }}{{ .Title }} à Villeneuve-sur-Lot{{ end }}"
+                   loading="lazy" decoding="async">
             {{ end }}
           {{ else }}
-            <!-- Pas d'image fournie -->
             <img src="/placeholder-3x2.webp" alt="" loading="lazy" decoding="async">
           {{ end }}
         </div>
@@ -65,14 +82,45 @@
             {{ with .Params.duration }}<span class="duration-chip">⏱ {{ . }}</span>{{ end }}
             {{ with .Params.price }}<span class="price-chip">{{ . }} €</span>{{ end }}
           </div>
-
         </div>
       </article>
+
+      <!-- JSON-LD Service pour le soin -->
+      <script type="application/ld+json">
+      {
+        "@context":"https://schema.org",
+        "@type":"Service",
+        "name": "{{ .Title }} à Villeneuve-sur-Lot",
+        "areaServed": "{{ .Params.areaServed | default "Villeneuve-sur-Lot" }}",
+        "serviceType": "Massage bien-être",
+        "description": {{ printf "%q" (.Params.description | default .Title) }},
+        "provider": {
+          "@type":"LocalBusiness",
+          "name":"{{ .Site.Params.business_name }}",
+          "telephone":"{{ .Site.Params.phone }}",
+          "address":{
+            "@type":"PostalAddress",
+            "streetAddress":"{{ .Site.Params.streetAddress }}",
+            "addressLocality":"{{ .Site.Params.city }}",
+            "postalCode":"{{ .Site.Params.postalCode }}",
+            "addressCountry":"{{ .Site.Params.country }}"
+          }
+        },
+        "offers":{
+          "@type":"Offer",
+          "price":"{{ printf "%.2f" (float (.Params.price | default 0)) }}",
+          "priceCurrency":"{{ .Params.priceCurrency | default "EUR" }}",
+          "availability":"https://schema.org/{{ cond (eq (.Params.availability | default "InStoreOnly") "InStoreOnly") "InStoreOnly" "InStoreOnly" }}",
+          "url":"{{ .Permalink }}"
+        }
+      }
+      </script>
+
     </div>
   </section>
 {{ end }}
 
 <section class="section has-text-centered">
-  <p><em>Règlement accepté : chèque ou espèces.</em></p>
+  <p><em>Règlement accepté : {{ .Site.Params.payment | default "chèque ou espèces" }}.</em></p>
 </section>
 {{ end }}
