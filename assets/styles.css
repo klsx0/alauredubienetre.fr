@@ -272,3 +272,16 @@ footer.footer a:hover{ color:#7a3a3b; }
   .hero-content-card{ padding:16px; border-radius:var(--radius-sm); }
   .card.highlighted{ box-shadow:0 8px 18px var(--c-card-shadow); }
 }
+/* Hauteur par défaut, surchargée dynamiquement par JS */
+:root { --nav-h: 64px; }
+
+/* Évite que la navbar fixe chevauche le contenu */
+body.has-navbar-fixed-top { padding-top: var(--nav-h); }
+
+/* Les sauts vers des ancres (#id) tiennent compte de la navbar */
+html { scroll-padding-top: var(--nav-h); }
+
+/* (Optionnel) Ajuste un peu sur grand écran si pas de JS */
+@media (min-width: 1024px){
+  :root { --nav-h: 72px; }
+}

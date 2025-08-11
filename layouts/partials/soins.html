@@ -27,7 +27,7 @@
                     <img
                       class="image-block has-ratio"
                       src="{{ $webp360.RelPermalink }}"
-                      alt="{{ .Title }}"
+                      alt="{{ with .Params.alt }}{{ . }}{{ else }}{{ .Title }} à Villeneuve-sur-Lot{{ end }}"
                       loading="lazy"
                       decoding="async"
                       width="{{ $webp720.Width }}"
@@ -38,7 +38,7 @@
                   <img
                     class="image-block has-ratio"
                     src="{{ printf "/%s" .Params.pic | relURL }}"
-                    alt="{{ .Title }}"
+                    alt="{{ with .Params.alt }}{{ . }}{{ else }}{{ .Title }} à Villeneuve-sur-Lot{{ end }}"
                     loading="lazy"
                     decoding="async">
                 {{ end }}
@@ -52,7 +52,6 @@
                   <p class="title is-4"><b>{{ .Title }}</b></p>
                   <p class="subtitle is-6">{{ with .Params.description }}{{ . }}{{ end }}</p>
 
-                  <!-- Conteneur dédié pour pousser les chips en bas -->
                   <div class="chips-container is-flex is-align-items-center is-flex-wrap-wrap" style="gap:.5rem;">
                     {{ with .Params.duration }}<span class="duration-chip">⏱ {{ . }}</span>{{ end }}
                     {{ with .Params.price }}<span class="price-chip">{{ . }} €</span>{{ end }}
